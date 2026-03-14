@@ -1,0 +1,34 @@
+character,unicode_hex,unicode_name,ipa,variety,description,is_distinct_phoneme,encoding_issue
+a,U+0061,LATIN SMALL LETTER A,/a/,All,Open front unrounded vowel,yes,none
+c,U+0063,LATIN SMALL LETTER C,/tʃ/,Mutsun;Chochenyo;OCEN,Voiceless postalveolar affricate,yes,none
+d,U+0064,LATIN SMALL LETTER D,/d/,Mutsun,Voiced alveolar stop (loanwords),no,none
+e,U+0065,LATIN SMALL LETTER E,/e/,All,Close-mid front unrounded vowel,yes,none
+h,U+0068,LATIN SMALL LETTER H,/h/,Mutsun;Rumsen,Voiceless glottal fricative,yes,none
+i,U+0069,LATIN SMALL LETTER I,/i/,All,Close front unrounded vowel,yes,none
+k,U+006B,LATIN SMALL LETTER K,/k/,All,Voiceless velar stop,yes,none
+l,U+006C,LATIN SMALL LETTER L,/l/,All,Alveolar lateral approximant,yes,none
+L,U+004C,LATIN CAPITAL LETTER L,/lʲ/,Mutsun,Palatalized lateral approximant,yes,case_folding_conflation
+m,U+006D,LATIN SMALL LETTER M,/m/,All,Bilabial nasal,yes,none
+n,U+006E,LATIN SMALL LETTER N,/n/,All,Alveolar nasal,yes,none
+N,U+004E,LATIN CAPITAL LETTER N,/ɲ/,Mutsun,Palatal nasal,yes,case_folding_conflation
+o,U+006F,LATIN SMALL LETTER O,/o/,All,Close-mid back rounded vowel,yes,none
+p,U+0070,LATIN SMALL LETTER P,/p/,All,Voiceless bilabial stop,yes,none
+r,U+0072,LATIN SMALL LETTER R,/ɾ/,All,Alveolar tap/flap,yes,none
+s,U+0073,LATIN SMALL LETTER S,/s/,Mutsun;Rumsen,Voiceless alveolar fricative,yes,none
+s,U+0073,LATIN SMALL LETTER S,/ʃ/,Chochenyo;OCEN,Voiceless postalveolar fricative,yes,none
+S,U+0053,LATIN CAPITAL LETTER S,/ʂ/,Mutsun,Voiceless retroflex fricative,yes,case_folding_conflation
+t,U+0074,LATIN SMALL LETTER T,/t/,All,Voiceless alveolar stop,yes,none
+T,U+0054,LATIN CAPITAL LETTER T,/ʈ/,Mutsun;Chochenyo;OCEN,Voiceless retroflex stop,yes,case_folding_conflation
+u,U+0075,LATIN SMALL LETTER U,/u/,All,Close back rounded vowel,yes,none
+w,U+0077,LATIN SMALL LETTER W,/w/,All,Labial-velar approximant,yes,none
+x,U+0078,LATIN SMALL LETTER X,/x/,Rumsen,Voiceless velar fricative,yes,none
+x,U+0078,LATIN SMALL LETTER X,/h/,Chochenyo;OCEN,Voiceless glottal fricative,yes,none
+y,U+0079,LATIN SMALL LETTER Y,/j/,All,Palatal approximant,yes,none
+č,U+010D,LATIN SMALL LETTER C WITH CARON,/tʃ/,Rumsen,Voiceless postalveolar affricate,yes,none
+ş,U+015F,LATIN SMALL LETTER S WITH CEDILLA,/ʃ/,Rumsen,Voiceless postalveolar fricative,yes,none
+ŝ,U+015D,LATIN SMALL LETTER S WITH CIRCUMFLEX,/ʃ/,Rumsen;Chochenyo,Voiceless postalveolar fricative (alt),yes,none
+ţ,U+0163,LATIN SMALL LETTER T WITH CEDILLA,/ts/,Rumsen,Voiceless alveolar affricate,yes,none
+ʼ,U+02BC,MODIFIER LETTER APOSTROPHE,/ʔ/,All,Glottal stop (preferred encoding),yes,apostrophe_confusion
+ʔ,U+0294,LATIN LETTER GLOTTAL STOP,/ʔ/,Rumsen,Glottal stop (IPA encoding),yes,none
+ts,U+0074+U+0073,DIGRAPH,/ts/,Mutsun,Voiceless alveolar affricate,yes,digraph
+tY,U+0074+U+0059,DIGRAPH,/tʲ/,Mutsun,Voiceless palatal stop,yes,digraph
