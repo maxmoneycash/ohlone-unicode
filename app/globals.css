@@ -1,0 +1,181 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  color-scheme: dark;
+  --font-ohlone:
+    "Charis SIL", "Gentium Plus", var(--font-body), "Noto Sans", system-ui,
+    sans-serif;
+  --color-night: #12150f;
+  --color-night-2: #171a14;
+  --color-panel: #1c2019;
+  --color-panel-muted: #191d16;
+  --color-panel-strong: #242921;
+  --color-border: #353a31;
+  --color-border-strong: #4b5144;
+  --color-parchment: #f3ecde;
+  --color-mist: #c9c1ae;
+  --color-copy-dim: #a49d8d;
+  --color-ochre: #c79c57;
+  --color-ochre-soft: rgba(199, 156, 87, 0.14);
+  --color-green: #8fa28d;
+  --color-green-soft: rgba(143, 162, 141, 0.16);
+  --color-warning: #d58764;
+  --shadow-panel: 0 8px 24px rgba(0, 0, 0, 0.18);
+  --background: #12150f;
+  --foreground: #f3ecde;
+  --card: #1c2019;
+  --card-foreground: #f3ecde;
+  --popover: #1c2019;
+  --popover-foreground: #f3ecde;
+  --primary: #c79c57;
+  --primary-foreground: #12150f;
+  --secondary: #242921;
+  --secondary-foreground: #f3ecde;
+  --muted: #242921;
+  --muted-foreground: #a49d8d;
+  --accent: #242921;
+  --accent-foreground: #f3ecde;
+  --destructive: #d58764;
+  --border: #353a31;
+  --input: #2a2f27;
+  --ring: #c79c57;
+  --chart-1: #c79c57;
+  --chart-2: #8fa28d;
+  --chart-3: #d58764;
+  --chart-4: #bcb19a;
+  --chart-5: #5e6557;
+  --radius: 0.75rem;
+  --sidebar: #1c2019;
+  --sidebar-foreground: #f3ecde;
+  --sidebar-primary: #c79c57;
+  --sidebar-primary-foreground: #12150f;
+  --sidebar-accent: #242921;
+  --sidebar-accent-foreground: #f3ecde;
+  --sidebar-border: #353a31;
+  --sidebar-ring: #c79c57;
+}
+
+* {
+  border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100dvh;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+.app-grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill='%23c9c1ae' fill-opacity='0.05'%3E%3Ccircle cx='24' cy='26' r='1.25'/%3E%3Ccircle cx='98' cy='34' r='1'/%3E%3Ccircle cx='136' cy='78' r='1.4'/%3E%3Ccircle cx='60' cy='94' r='0.9'/%3E%3Ccircle cx='128' cy='132' r='1.1'/%3E%3Ccircle cx='40' cy='144' r='1.2'/%3E%3Ccircle cx='14' cy='104' r='0.85'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+@theme inline {
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-sans: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+@utility section-shell {
+  @apply rounded-[1.5rem] border bg-card p-5 shadow-sm sm:p-6 lg:p-7;
+  box-shadow: var(--shadow-panel);
+}
+
+@utility small-label {
+  @apply text-xs font-medium uppercase text-[var(--color-mist)];
+}
+
+@utility ohlone-body {
+  font-family: var(--font-ohlone);
+  font-feature-settings: "kern" 1;
+}
+
+@utility editorial-heading {
+  @apply font-[family-name:var(--font-display)] leading-[0.95] text-balance;
+}
+
+@utility body-copy {
+  @apply text-sm leading-6 text-[var(--color-mist)] text-pretty sm:text-base;
+}
+
+@utility quiet-rule {
+  @apply border-t border-border/80;
+}
+
+@layer base {
+  html {
+    @apply font-sans;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply text-balance;
+  }
+
+  p {
+    @apply text-pretty;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    @apply outline-offset-2;
+  }
+
+  ::selection {
+    background: var(--color-ochre-soft);
+  }
+}
+
+.dark {
+  color-scheme: dark;
+}
