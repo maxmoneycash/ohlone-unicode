@@ -1,0 +1,270 @@
+{
+  "metadata": {
+    "name": "Ohlone corpus source backlog",
+    "purpose": "High-value sources to evaluate before adding more dictionary, text, or audio material.",
+    "last_updated": "2026-05-26",
+    "review_policy": "Prefer primary archives, published dictionaries/grammars, and community-approved resources. Separate discovery from reuse rights."
+  },
+  "items": [
+    {
+      "name": "Mutsun-English English-Mutsun Dictionary PDF",
+      "url": "https://www.santacruzmuseum.org/wp-content/uploads/2020/10/MutsunDictionary_WarnerButlerGeary.pdf",
+      "varieties": ["Mutsun"],
+      "content_type": "dictionary_pdf",
+      "status": "scraped_full_text",
+      "priority": "high",
+      "why_it_matters": "This is a 677-page text-readable dictionary with CC BY-NC 4.0 licensing and enough structure to become the primary Mutsun lexical source.",
+      "next_action": "Parse the scraped page/chunk files into reviewed dictionary entries and examples."
+    },
+    {
+      "name": "Mutsun Text Collection",
+      "url": "https://scholarcommons.scu.edu/mutsun/",
+      "varieties": ["Mutsun"],
+      "content_type": "texts_and_translations",
+      "status": "partially_represented",
+      "priority": "high",
+      "why_it_matters": "Longer texts are more valuable than isolated word lists for grammar, examples, and RAG context.",
+      "next_action": "Inventory each downloadable text and map it to phrase/example records with page or item references."
+    },
+    {
+      "name": "Quizlet: Chochenyo final set (all words)",
+      "url": "https://quizlet.com/793265063/chochenyo-final-set-all-words-flash-cards/",
+      "varieties": ["Chochenyo"],
+      "content_type": "user_generated_flashcards",
+      "status": "metadata_only_blocked_by_403",
+      "priority": "medium",
+      "why_it_matters": "Search indexing reports a 188-card Chochenyo learning set with greetings, pronouns, and everyday vocabulary, which could help identify modern learner forms to verify against primary/community sources.",
+      "next_action": "Do not bulk scrape. Ask the set author or relevant Chochenyo/Muwekma language authority for permission, then verify every card against primary or community-approved sources before ingestion."
+    },
+    {
+      "name": "Mutsun Language Database Exports",
+      "url": "https://experts.arizona.edu/en/datasets/mutsun-language-database-exports-2/",
+      "varieties": ["Mutsun"],
+      "content_type": "database_export",
+      "status": "not_ingested",
+      "priority": "high",
+      "why_it_matters": "Potentially structured lexical and text material that may reduce manual cleanup.",
+      "next_action": "Check download access, license, and field schema before import."
+    },
+    {
+      "name": "Pinart mission vocabularies / Heizer 1952",
+      "url": "https://digitalassets.lib.berkeley.edu/anthpubs/ucb/text/ucar015-001.pdf",
+      "varieties": ["Awaswas", "Chalon", "Rumsen", "multi_or_unspecified"],
+      "content_type": "mission_vocabulary_pdf",
+      "status": "not_ingested",
+      "priority": "high",
+      "why_it_matters": "Digitized mission-era Costanoan wordlists may fill gaps for Chalon, Awaswas, Rumsen, and related historical varieties.",
+      "next_action": "Review edition rights and community sensitivity, then extract item-level vocabulary with historical-transcription status."
+    },
+    {
+      "name": "Schoolcraft Costanos vocabulary",
+      "url": "https://library.si.edu/digital-library/book/historicalstat02scho",
+      "varieties": ["Ramaytush"],
+      "content_type": "early_wordlist",
+      "status": "not_ingested",
+      "priority": "high",
+      "why_it_matters": "One of the few online lexical leads for the Mission Dolores / San Francisco Bay area vocabulary.",
+      "next_action": "Extract only after Ramaytush review; label forms as early colonial transcription."
+    },
+    {
+      "name": "Powell 1877 Tribes of California appendix",
+      "url": "https://archive.org/details/tribesofcaliforn03powe",
+      "varieties": ["Awaswas", "Mutsun", "Santa Clara", "Tamyen", "multi_or_unspecified"],
+      "content_type": "comparative_wordlists",
+      "status": "not_ingested",
+      "priority": "high",
+      "why_it_matters": "Public-domain comparative lists may add Tamyen and Santa Clara evidence where the current corpus is thin.",
+      "next_action": "Use as historical evidence only, with exact source labels and no automatic normalization."
+    },
+    {
+      "name": "Henshaw mission vocabularies / Heizer 1955",
+      "url": "https://digitalassets.lib.berkeley.edu/anthpubs/ucb/text/ucar015-002.pdf",
+      "varieties": ["Rumsen", "multi_or_unspecified"],
+      "content_type": "mission_vocabulary_pdf",
+      "status": "not_ingested",
+      "priority": "high",
+      "why_it_matters": "Companion mission vocabulary source that may explain or validate Rumsen and other Costanoan forms.",
+      "next_action": "Review edition rights and compare against primary transcriptions before ingestion."
+    },
+    {
+      "name": "California Language Archive - Chochenyo",
+      "url": "https://cla.berkeley.edu/languages/chochenyo.html",
+      "varieties": ["Chochenyo"],
+      "content_type": "archive_catalog",
+      "status": "cataloged_not_itemized",
+      "priority": "high",
+      "why_it_matters": "Primary catalog for recordings, field notes, and collection metadata.",
+      "next_action": "Create item-level records for publicly viewable materials and restricted-access requests."
+    },
+    {
+      "name": "California Language Archive - Mutsun",
+      "url": "https://cla.berkeley.edu/languages/mutsun.html",
+      "varieties": ["Mutsun"],
+      "content_type": "archive_catalog",
+      "status": "cataloged_not_itemized",
+      "priority": "high",
+      "why_it_matters": "Primary archive path for legacy Mutsun recordings and manuscripts.",
+      "next_action": "Cross-reference CLA item identifiers with current audio and source tables."
+    },
+    {
+      "name": "Smithsonian Harrington Costanoan Papers",
+      "url": "https://sova.si.edu",
+      "varieties": ["Awaswas", "Chochenyo", "Mutsun", "Ramaytush", "Rumsen", "Santa Clara", "Soledad"],
+      "content_type": "field_notes",
+      "status": "source_level_only",
+      "priority": "high",
+      "why_it_matters": "Field notes are central evidence for many varieties but require careful transcription and provenance.",
+      "next_action": "Build an item-level finding-aid index and mark which boxes/folders contain language data."
+    },
+    {
+      "name": "ASJP Rumsen wordlist",
+      "url": "https://asjp.clld.org/languages/RUMSEN",
+      "varieties": ["Rumsen"],
+      "content_type": "secondary_machine_readable_wordlist",
+      "status": "not_ingested",
+      "priority": "medium",
+      "why_it_matters": "Small normalized 40-item comparative list useful for computational comparison and sanity checks.",
+      "next_action": "Use as secondary comparison data only; verify every form against primary/community sources."
+    },
+    {
+      "name": "Kroeber 1910: The Chumash and Costanoan Languages",
+      "url": "https://digitalassets.lib.berkeley.edu/anthpubs/ucb/text/ucp009-006.pdf",
+      "varieties": ["multi_or_unspecified"],
+      "content_type": "comparative_linguistic_study",
+      "status": "not_ingested",
+      "priority": "medium",
+      "why_it_matters": "Public-domain comparative forms and classification notes can support source interpretation across Costanoan varieties.",
+      "next_action": "Use for bibliography and cross-checks; do not treat comparative forms as community vocabulary."
+    },
+    {
+      "name": "Kroeber 1904: Languages of the Coast of California South of San Francisco",
+      "url": "https://digitalassets.lib.berkeley.edu/anthpubs/ucb/text/ucp002-004.pdf",
+      "varieties": ["Rumsen", "multi_or_unspecified"],
+      "content_type": "grammar_and_lexical_notes",
+      "status": "not_ingested",
+      "priority": "medium",
+      "why_it_matters": "Early southern Costanoan analysis may help with Rumsen and Monterey-area historical forms.",
+      "next_action": "Ingest selectively, marking all forms as historical transcription."
+    },
+    {
+      "name": "Mason 1916: The Mutsun Dialect of Costanoan",
+      "url": "https://digitalassets.lib.berkeley.edu/anthpubs/ucb/text/ucp011-005.pdf",
+      "varieties": ["Mutsun"],
+      "content_type": "grammar_and_lexical_analysis",
+      "status": "not_ingested",
+      "priority": "medium",
+      "why_it_matters": "Useful public-domain cross-check for Arroyo/Okrand/Warner-derived Mutsun data.",
+      "next_action": "Use primarily for validation against stronger Mutsun sources already in the corpus."
+    },
+    {
+      "name": "Beeler 1972: An Extension of San Francisco Bay Costanoan?",
+      "url": "https://escholarship.org/uc/item/4nr7h4x0",
+      "varieties": ["Ramaytush"],
+      "content_type": "scholarly_analysis",
+      "status": "not_ingested",
+      "priority": "medium",
+      "why_it_matters": "Helps interpret San Francisco Bay Costanoan classification and the Schoolcraft/Alcantara vocabulary.",
+      "next_action": "Use as citation and analysis only, not as bulk lexical data."
+    },
+    {
+      "name": "Levy 1976: Costanoan Internal Relationships",
+      "url": "https://escholarship.org/uc/item/6q89k6d7",
+      "varieties": ["Awaswas", "Chalon", "Chochenyo", "Mutsun", "Ramaytush", "Rumsen", "Tamyen"],
+      "content_type": "comparative_source_map",
+      "status": "not_ingested",
+      "priority": "medium",
+      "why_it_matters": "Useful bibliography and dialect relationship layer for interpreting source-of-sources evidence.",
+      "next_action": "Use for source mapping and validation, not direct dictionary data."
+    },
+    {
+      "name": "Ohlone Spoken Word audio",
+      "url": "https://commons.wikimedia.org/wiki/File:Ohlone_Spoken_Word.ogg",
+      "varieties": ["multi_or_unspecified"],
+      "content_type": "audio",
+      "status": "not_ingested",
+      "priority": "medium",
+      "why_it_matters": "A public audio lead that may contain useful spoken examples if rights and transcription are clear.",
+      "next_action": "Verify license, speaker consent, and transcript availability before creating audio segments."
+    },
+    {
+      "name": "Muwekma Ohlone Language Revitalization",
+      "url": "https://www.muwekma.org/language-revitalization.html",
+      "varieties": ["Chochenyo"],
+      "content_type": "community_page",
+      "status": "represented_source",
+      "priority": "medium",
+      "why_it_matters": "Community context should frame Chochenyo data use and attribution.",
+      "next_action": "Keep as citation/context unless explicit downloadable language data is offered."
+    },
+    {
+      "name": "Muwekma Ohlone educational toolkit",
+      "url": "https://resources.ca.gov/-/media/CNRA-Website/Files/Initiatives/California-Native-American-Tribal-Affairs/Muwekma-Ohlone-Educational-Toolkit.pdf",
+      "varieties": ["Chochenyo"],
+      "content_type": "public_teaching_handout",
+      "status": "metadata_only",
+      "priority": "medium",
+      "why_it_matters": "Community-framed educational material can guide context, naming, and respectful source presentation.",
+      "next_action": "Link and cite; do not bulk ingest Chochenyo language content without Muwekma permission."
+    },
+    {
+      "name": "mak-'amham / Cafe Ohlone",
+      "url": "https://www.makamham.com/",
+      "varieties": ["Chochenyo", "Rumsen"],
+      "content_type": "community_language_in_use",
+      "status": "metadata_only",
+      "priority": "medium",
+      "why_it_matters": "Modern public Ohlone language use in cultural context can identify living-language usage and orthographic choices.",
+      "next_action": "Treat as living community intellectual property; metadata only unless explicit permission is granted."
+    },
+    {
+      "name": "Ramaytush Ohlone terminology",
+      "url": "https://www.ramaytush.org/terminology.html",
+      "varieties": ["Ramaytush"],
+      "content_type": "community_protocol",
+      "status": "metadata_only",
+      "priority": "medium",
+      "why_it_matters": "Important rights and naming guidance before any Ramaytush lexical ingestion.",
+      "next_action": "Use to shape permission workflow and citation language."
+    },
+    {
+      "name": "SFPUC Ohlone language article",
+      "url": "https://sfpuc.org/learning/about-your-water/newsletters/ohlone-language",
+      "varieties": ["Ramaytush", "multi_or_unspecified"],
+      "content_type": "public_language_explainer",
+      "status": "metadata_only",
+      "priority": "low",
+      "why_it_matters": "A public lead for Ramaytush language visibility, including plaque vocabulary references.",
+      "next_action": "Verify provenance and permission before extracting any plaque words."
+    },
+    {
+      "name": "Amah Mutsun Language",
+      "url": "https://amahmutsun.org/language",
+      "varieties": ["Mutsun"],
+      "content_type": "community_page",
+      "status": "represented_source",
+      "priority": "medium",
+      "why_it_matters": "Community context should frame Mutsun data use and attribution.",
+      "next_action": "Keep as citation/context unless explicit downloadable language data is offered."
+    },
+    {
+      "name": "Sogorea Te' / Mak Noono Tiirinikma",
+      "url": "https://sogoreate-landtrust.org/mak-noono-tiirinikma/",
+      "varieties": ["Chochenyo"],
+      "content_type": "community_learning",
+      "status": "represented_source",
+      "priority": "medium",
+      "why_it_matters": "Community-led learning materials can clarify current usage and spelling choices.",
+      "next_action": "Do not scrape beyond public citation without permission."
+    },
+    {
+      "name": "UC Davis Harrington Database Project",
+      "url": "https://nalc.ucdavis.edu/project/jp-harrington-database-project",
+      "varieties": ["Awaswas", "Chochenyo", "Mutsun", "Ramaytush", "Rumsen", "Santa Clara", "Soledad"],
+      "content_type": "database_project",
+      "status": "represented_source",
+      "priority": "medium",
+      "why_it_matters": "May help locate Harrington items and metadata across institutions.",
+      "next_action": "Use as a discovery index, not as lexical evidence unless item-level text is available."
+    }
+  ]
+}

@@ -14,12 +14,31 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import type { DictionaryEntry, PhraseEntry } from "@/lib/ohlone-data";
+import type { AudioReference } from "@/lib/ohlone-data";
 import { canonicalWord, tokenizeOhloneText, wordToIpa, type Variety } from "@/lib/orthography";
 
+export type BuilderDictionaryEntry = {
+  id: number;
+  word: string;
+  english: string;
+  ipaResolved: string;
+  pos: string | null;
+  variety: Variety;
+  meanings: string[];
+  audio: AudioReference | null;
+};
+
+export type BuilderPhraseEntry = {
+  id: number;
+  phrase: string;
+  english: string | null;
+  variety: Variety;
+  audio: AudioReference | null;
+};
+
 type SentenceBuilderProps = {
-  entries: DictionaryEntry[];
-  phrases: PhraseEntry[];
+  entries: BuilderDictionaryEntry[];
+  phrases: BuilderPhraseEntry[];
   varieties: Variety[];
 };
 
@@ -32,23 +51,21 @@ type BuilderToken = {
   audioUrl: string | null;
 };
 
-function tokenFromEntry(entry: DictionaryEntry): BuilderToken {
+function tokenFromEntry(entry: BuilderDictionaryEntry): BuilderToken {
   return {
     id: `entry-${entry.id}`,
     word: entry.word,
     english: entry.meanings[0] ?? entry.english,
     ipa: entry.ipaResolved,
     variety: entry.variety,
-    audioUrl:
-      entry.audio?.url ??
-      `/api/speech?text=${encodeURIComponent(entry.word)}&variety=${encodeURIComponent(entry.variety)}`,
+    audioUrl: entry.audio?.url ?? null,
   };
 }
 
 function tokenFromWord(
   word: string,
   variety: Variety,
-  entryLookup: Map<string, DictionaryEntry>,
+  entryLookup: Map<string, BuilderDictionaryEntry>,
   index: number,
 ): BuilderToken {
   const match = entryLookup.get(canonicalWord(word, variety));
@@ -82,7 +99,7 @@ export function SentenceBuilder({
   const [activePhraseId, setActivePhraseId] = useState<number | null>(null);
   const [status, setStatus] = useState<string | null>(null);
   const deferredQuery = useDeferredValue(query.trim().toLocaleLowerCase());
-  const { activeId, error, playSource, stop } = useAudioPlayer();
+  const { activeId, error, playQueue, playSource, stop } = useAudioPlayer();
 
   const entryLookup = useMemo(
     () =>
@@ -149,16 +166,39 @@ export function SentenceBuilder({
       return;
     }
 
-    setStatus(null);
+    if (activePhrase?.audio) {
+      setStatus(null);
+      await playSource({
+        id: `sentence-full-${variety}`,
+        url: activePhrase.audio.url,
+        speechText: text,
+        onError: (message) => setStatus(message),
+      });
+      return;
+    }
 
-    await playSource({
-      id: `sentence-full-${variety}`,
-      url:
-        activePhrase?.audio?.url ??
-        `/api/speech?text=${encodeURIComponent(text)}&variety=${encodeURIComponent(variety)}`,
-      speechText: text,
-      onError: (message) => setStatus(message),
-    });
+    const playableTokens = sentence.filter((token) => token.audioUrl);
+
+    if (playableTokens.length === 0) {
+      setStatus("No archived audio is available for this sentence yet.");
+      return;
+    }
+
+    const missingCount = sentence.length - playableTokens.length;
+    setStatus(
+      missingCount > 0
+        ? `Playing ${playableTokens.length} recorded ${playableTokens.length === 1 ? "word" : "words"}; ${missingCount} ${missingCount === 1 ? "word has" : "words have"} no archived audio yet.`
+        : null,
+    );
+
+    await playQueue(
+      playableTokens.map((token) => ({
+        id: `sentence-token-${token.id}`,
+        url: token.audioUrl ?? undefined,
+        speechText: token.word,
+        onError: (message) => setStatus(message),
+      })),
+    );
   }
 
   async function loadRandomPhraseAndPlay() {
@@ -174,16 +214,20 @@ export function SentenceBuilder({
 
     setSentence(tokens);
     setActivePhraseId(phrase.id);
-    setStatus(phrase.english ?? "Attested phrase loaded.");
+    setStatus(
+      phrase.audio
+        ? phrase.english ?? "Attested phrase loaded."
+        : "Phrase loaded. No archived full-phrase audio is available yet.",
+    );
 
-    await playSource({
-      id: `phrase-${phrase.id}`,
-      url:
-        phrase.audio?.url ??
-        `/api/speech?text=${encodeURIComponent(phrase.phrase)}&variety=${encodeURIComponent(phrase.variety)}`,
-      speechText: phrase.phrase,
-      onError: (message) => setStatus(message),
-    });
+    if (phrase.audio) {
+      await playSource({
+        id: `phrase-${phrase.id}`,
+        url: phrase.audio.url,
+        speechText: phrase.phrase,
+        onError: (message) => setStatus(message),
+      });
+    }
   }
 
   return (
@@ -192,11 +236,11 @@ export function SentenceBuilder({
         <div className="section-shell space-y-4">
           <div className="small-label">Sentence Builder</div>
           <h1 className="editorial-heading text-4xl text-[var(--color-parchment)] sm:text-5xl">
-            Load an attested phrase or build your own, then hear it as one continuous sentence.
+            Build with attested Chochenyo words and play recordings when available.
           </h1>
           <p className="body-copy max-w-3xl">
-            Full-sentence playback uses one audio request so the phrase flows
-            naturally instead of sounding like a stack of disconnected words.
+            The builder uses archived recordings only, so missing audio stays
+            visible as a corpus gap.
           </p>
         </div>
 
@@ -234,7 +278,7 @@ export function SentenceBuilder({
 
             <div className="flex flex-wrap gap-2">
               <Button onClick={() => void loadRandomPhraseAndPlay()}>
-                Generate and play
+                Load phrase
               </Button>
               <Button
                 variant="outline"
@@ -271,7 +315,7 @@ export function SentenceBuilder({
           {sentence.length === 0 ? (
             <div className="rounded-xl border border-dashed border-[var(--color-border)] bg-[var(--color-panel-muted)] p-5">
               <p className="body-copy">
-                Press `Generate and play` for an attested phrase, or add words from the library below.
+                Load an attested phrase, or add words from the library below.
               </p>
             </div>
           ) : (
@@ -305,17 +349,16 @@ export function SentenceBuilder({
                   </p>
                   <div className="mt-4 flex flex-wrap gap-2">
                     <Button
+                      disabled={!token.audioUrl}
                       onClick={() =>
                         void playSource({
                           id: `sentence-token-${index}-${token.id}`,
-                          url:
-                            token.audioUrl ??
-                            `/api/speech?text=${encodeURIComponent(token.word)}&variety=${encodeURIComponent(token.variety)}`,
+                          url: token.audioUrl ?? undefined,
                           speechText: token.word,
                         })
                       }
                     >
-                      {activeId === `sentence-token-${index}-${token.id}` ? "Playing" : "Play"}
+                      {token.audioUrl ? (activeId === `sentence-token-${index}-${token.id}` ? "Playing" : "Play") : "No audio"}
                     </Button>
                     <Button
                       variant="outline"
@@ -409,17 +452,16 @@ export function SentenceBuilder({
               </p>
               <div className="mt-4 flex flex-wrap gap-2">
                 <Button
+                  disabled={!entry.audio}
                   onClick={() =>
                     void playSource({
                       id: `library-${entry.id}`,
-                      url:
-                        entry.audio?.url ??
-                        `/api/speech?text=${encodeURIComponent(entry.word)}&variety=${encodeURIComponent(entry.variety)}`,
+                      url: entry.audio?.url,
                       speechText: entry.word,
                     })
                   }
                 >
-                  {activeId === `library-${entry.id}` ? "Playing" : "Hear"}
+                  {entry.audio ? (activeId === `library-${entry.id}` ? "Playing" : "Hear") : "No audio"}
                 </Button>
                 <Button
                   variant="outline"

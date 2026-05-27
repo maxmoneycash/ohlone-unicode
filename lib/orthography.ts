@@ -1,4 +1,13 @@
-export const VARIETY_ORDER = ["Mutsun", "Chochenyo", "OCEN Rumsen", "Ramaytush", "Awaswas"] as const;
+export const VARIETY_ORDER = [
+  "Mutsun",
+  "Chochenyo",
+  "OCEN Rumsen",
+  "Rumsen",
+  "Ramaytush",
+  "Awaswas",
+  "Soledad",
+  "Santa Clara",
+] as const;
 
 export type Variety = (typeof VARIETY_ORDER)[number];
 
@@ -107,6 +116,22 @@ const AWASWAS_TO_IPA: Mapping = [
   ["p", "p"], ["r", "ɾ"], ["s", "s"], ["t", "t"], ["w", "w"], ["y", "j"],
 ];
 
+// Historical mission-era transcriptions vary by recorder. This map is intentionally
+// conservative: it supports search/pronunciation helpers without normalizing away
+// source spellings from OCR and archival word lists.
+const HISTORICAL_COSTANOAN_TO_IPA: Mapping = [
+  ["ch", "tʃ"],
+  ["tc", "tʃ"],
+  ["sh", "ʃ"],
+  ["x", "h"],
+  ["'", "ʔ"],
+  ["ʼ", "ʔ"],
+  ["aa", "aː"], ["ee", "eː"], ["ii", "iː"], ["oo", "oː"], ["uu", "uː"],
+  ["a", "a"], ["e", "e"], ["i", "i"], ["o", "o"], ["u", "u"],
+  ["h", "h"], ["k", "k"], ["l", "l"], ["m", "m"], ["n", "n"],
+  ["p", "p"], ["r", "ɾ"], ["s", "s"], ["t", "t"], ["w", "w"], ["y", "j"],
+];
+
 const OCEN_TO_IPA: Mapping = [
   ["T", "ʈ"],
   ["ts", "ts"],
@@ -154,8 +179,11 @@ export const VARIETY_IPA_MAPS: Record<Variety, Mapping> = {
   Mutsun: MUTSUN_TO_IPA,
   Chochenyo: CHOCHENYO_TO_IPA,
   "OCEN Rumsen": OCEN_TO_IPA,
+  Rumsen: HISTORICAL_COSTANOAN_TO_IPA,
   Ramaytush: RAMAYTUSH_TO_IPA,
   Awaswas: AWASWAS_TO_IPA,
+  Soledad: HISTORICAL_COSTANOAN_TO_IPA,
+  "Santa Clara": HISTORICAL_COSTANOAN_TO_IPA,
 };
 
 const ESPEAK_IPA_FIXES: readonly [source: string, target: string][] = [
@@ -168,16 +196,22 @@ const MAPPING_PRESERVE_CASE: Record<Variety, string[]> = {
   Mutsun: ["L", "N", "S", "T", "Y"],
   Chochenyo: ["T"],
   "OCEN Rumsen": ["T"],
+  Rumsen: [],
   Ramaytush: [],
   Awaswas: [],
+  Soledad: [],
+  "Santa Clara": [],
 };
 
 export const CASE_PHONEMES: Record<Variety, string[]> = {
   Mutsun: ["L", "N", "S", "T"],
   Chochenyo: ["T"],
   "OCEN Rumsen": ["T"],
+  Rumsen: [],
   Ramaytush: [],
   Awaswas: [],
+  Soledad: [],
+  "Santa Clara": [],
 };
 
 export function normalizeGlottalStops(text: string) {

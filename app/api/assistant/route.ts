@@ -15,7 +15,7 @@ type RequestBody = {
 function buildSystemPrompt(context: Awaited<ReturnType<typeof getAssistantContext>>) {
   return [
     "You are an Ohlone language assistant for a language preservation web app.",
-    "Use only the supplied corpus, orthography rules, phonology notes, and suffix-oriented entries.",
+    "Use only the supplied relevant evidence, source list, orthography rules, phonology notes, and suffix-oriented entries.",
     "Never invent unattested Ohlone words. If the corpus is insufficient, say so plainly.",
     "Preserve the correct glottal stop character ʼ (U+02BC).",
     "Do not collapse Mutsun phonemic capitals L, N, S, T into lowercase letters.",
@@ -29,7 +29,10 @@ function buildSystemPrompt(context: Awaited<ReturnType<typeof getAssistantContex
     "Phonology inventory:",
     JSON.stringify(context.phonology, null, 2),
     "",
-    "Dictionary:",
+    "Corpus sources:",
+    JSON.stringify(context.sources, null, 2),
+    "",
+    "Relevant dictionary evidence:",
     JSON.stringify(context.dictionary, null, 2),
     "",
     "Orthography guide:",
@@ -66,7 +69,7 @@ export async function POST(request: Request) {
   }
 
   const anthropic = new Anthropic({ apiKey });
-  const context = await getAssistantContext();
+  const context = await getAssistantContext({ query, variety, mode });
   const system = buildSystemPrompt(context);
   const model =
     mode === "grammar"
@@ -105,15 +108,21 @@ export async function POST(request: Request) {
     const message =
       error instanceof Error ? error.message : "Anthropic request failed.";
     const status =
-      /credit balance is too low|purchase credits|billing/i.test(message)
-        ? 503
-        : /api key|authentication|unauthorized|forbidden/i.test(message)
-          ? 401
-          : 500;
+      /rate limit|too many requests|429/i.test(message)
+        ? 429
+        : /credit balance is too low|purchase credits|billing/i.test(message)
+          ? 503
+          : /api key|authentication|unauthorized|forbidden/i.test(message)
+            ? 401
+            : 500;
+    const userMessage =
+      status === 429
+        ? "The language guide hit the model rate limit. The app now sends a smaller evidence packet, so try again in a minute."
+        : message;
 
     return Response.json(
       {
-        error: message,
+        error: userMessage,
       },
       { status },
     );

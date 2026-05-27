@@ -18,19 +18,36 @@ import { MicSelector } from "@/components/ui/mic-selector";
 import { Progress } from "@/components/ui/progress";
 import { VoiceButton, type VoiceButtonState } from "@/components/ui/voice-button";
 import { Waveform } from "@/components/ui/waveform";
-import type { DictionaryEntry, PhraseEntry } from "@/lib/ohlone-data";
+import type { AudioReference } from "@/lib/ohlone-data";
 import { formatDuration } from "@/lib/utils";
 import {
-  canonicalWord,
   timelineForText,
   tokenizeOhloneText,
   type Variety,
   wordToIpa,
 } from "@/lib/orthography";
 
+export type PracticeDictionaryEntry = {
+  id: number;
+  word: string;
+  english: string;
+  variety: Variety;
+  ipaResolved: string;
+  audio: AudioReference | null;
+};
+
+export type PracticePhraseEntry = {
+  id: number;
+  phrase: string;
+  english: string | null;
+  variety: Variety;
+  ipaResolved: string;
+  audio: AudioReference | null;
+};
+
 type PracticeModeProps = {
-  entries: DictionaryEntry[];
-  phrases: PhraseEntry[];
+  entries: PracticeDictionaryEntry[];
+  phrases: PracticePhraseEntry[];
   varieties: Variety[];
 };
 
@@ -49,13 +66,14 @@ export function PracticeMode({
   phrases,
   varieties,
 }: PracticeModeProps) {
-  const [variety, setVariety] = useState<Variety>("Mutsun");
+  const [variety, setVariety] = useState<Variety>("Chochenyo");
   const [selectedId, setSelectedId] = useState<string>("");
   const [activeSegment, setActiveSegment] = useState<number | null>(null);
   const [speed, setSpeed] = useState(0.9);
   const [recordingUrl, setRecordingUrl] = useState<string | null>(null);
   const [recordingMs, setRecordingMs] = useState<number | null>(null);
   const [recordingError, setRecordingError] = useState<string | null>(null);
+  const [playbackMessage, setPlaybackMessage] = useState<string | null>(null);
   const [recordingState, setRecordingState] = useState<VoiceButtonState>("idle");
   const [micDeviceId, setMicDeviceId] = useState("");
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
@@ -64,15 +82,10 @@ export function PracticeMode({
   const timeoutsRef = useRef<number[]>([]);
   const { error, isPlaying, playQueue, stop } = useAudioPlayer();
 
-  const dictionaryLookup = useMemo(
-    () => new Map(entries.map((entry) => [canonicalWord(entry.word, entry.variety), entry])),
-    [entries],
-  );
-
   const practiceItems = useMemo<PracticeItem[]>(
     () => [
       ...phrases
-        .filter((phrase) => phrase.variety === variety)
+        .filter((phrase) => phrase.variety === variety && phrase.audio)
         .map((phrase) => ({
           id: `phrase-${phrase.id}`,
           type: "phrase" as const,
@@ -156,35 +169,22 @@ export function PracticeMode({
       return;
     }
 
-    startTimeline();
-
-    if (activeItem.audioUrl) {
-      await playQueue([
-        {
-          id: activeItem.id,
-          url: activeItem.audioUrl,
-          rate: speed,
-          speechText: activeItem.text,
-        },
-      ]);
+    if (!activeItem.audioUrl) {
+      setPlaybackMessage("No archived audio is available for this item yet.");
       return;
     }
 
-    const tokens = tokenizeOhloneText(activeItem.text);
-    await playQueue(
-      tokens.map((token, index) => {
-        const entry = dictionaryLookup.get(canonicalWord(token, activeItem.variety));
+    setPlaybackMessage(null);
+    startTimeline();
 
-        return {
-          id: `${activeItem.id}-${index}`,
-          url:
-            entry?.audio?.url ??
-            `/api/speech?text=${encodeURIComponent(token)}&variety=${encodeURIComponent(activeItem.variety)}`,
-          rate: speed,
-          speechText: token,
-        };
-      }),
-    );
+    await playQueue([
+      {
+        id: activeItem.id,
+        url: activeItem.audioUrl,
+        rate: speed,
+        speechText: activeItem.text,
+      },
+    ]);
   }
 
   async function toggleRecording() {
@@ -244,11 +244,11 @@ export function PracticeMode({
         <div className="section-shell space-y-4">
           <div className="small-label">Pronunciation Practice</div>
           <h1 className="editorial-heading text-4xl text-[var(--color-parchment)] sm:text-5xl">
-            Follow the phonemes as they move, then record your own attempt.
+            Practice Chochenyo pronunciation from archived words.
           </h1>
           <p className="body-copy max-w-3xl">
-            Timing is estimated from the IPA inventory so learners can rehearse
-            articulation rather than just replay a clip.
+            Start with the words that have real audio, follow the phoneme guide,
+            then record your own attempt beside the target timing.
           </p>
         </div>
 
@@ -279,10 +279,10 @@ export function PracticeMode({
           <CardHeader>
             <div className="small-label">Practice Set</div>
             <CardTitle className="editorial-heading text-3xl text-[var(--color-parchment)]">
-              Pick a phrase or word.
+              Pick a Chochenyo recording.
             </CardTitle>
             <CardDescription className="body-copy">
-              Start with archived materials for the selected variety.
+              This set only uses archived recordings.
             </CardDescription>
           </CardHeader>
           <CardContent className="grid gap-3 pb-6">
@@ -402,9 +402,9 @@ export function PracticeMode({
                   />
                 </div>
 
-                {error || recordingError ? (
+                {error || recordingError || playbackMessage ? (
                   <p className="rounded-xl border border-[var(--color-warning)] bg-[rgba(213,135,100,0.12)] px-4 py-3 text-sm text-[var(--color-parchment)]">
-                    {error ?? recordingError}
+                    {error ?? recordingError ?? playbackMessage}
                   </p>
                 ) : null}
 

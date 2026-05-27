@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     template: "%s | Ohlone Language Atlas",
   },
   description:
-    "A respectful, mobile-first web app for exploring Ohlone dictionary data, audio, pronunciation, and language support across Mutsun, Chochenyo, and OCEN Rumsen.",
+    "A Chochenyo-first learning app for source-backed Ohlone words, audio, pronunciation, and language practice.",
 };
 
 export default function RootLayout({

@@ -62,6 +62,17 @@ type RawAudioEntry = {
   audio_file: string;
 };
 
+export type CorpusSource = {
+  id: number;
+  name: string;
+  url: string | null;
+  type: string;
+  description: string | null;
+  access_status: string | null;
+  content_length: number | null;
+  scraped_date: string | null;
+};
+
 type RawCorpus = {
   metadata: Record<string, unknown>;
   statistics: {
@@ -73,7 +84,7 @@ type RawCorpus = {
   dictionary: RawDictionaryEntry[];
   phrases: RawPhrase[];
   phonology: RawPhonology[];
-  sources: unknown[];
+  sources: CorpusSource[];
 };
 
 export type AudioReference = {
@@ -103,6 +114,7 @@ export type OhloneCorpus = {
   dictionary: DictionaryEntry[];
   phrases: PhraseEntry[];
   phonology: PhonologyEntry[];
+  sources: CorpusSource[];
   varieties: Variety[];
   partsOfSpeech: string[];
   statistics: RawCorpus["statistics"];
@@ -236,6 +248,7 @@ export const getCorpus = cache(async (): Promise<OhloneCorpus> => {
     dictionary,
     phrases,
     phonology: corpus.phonology,
+    sources: corpus.sources,
     varieties: [...VARIETY_ORDER],
     partsOfSpeech,
     statistics: corpus.statistics,
@@ -243,7 +256,91 @@ export const getCorpus = cache(async (): Promise<OhloneCorpus> => {
   };
 });
 
-export async function getAssistantContext() {
+function assistantTokens(value: string) {
+  const stopwords = new Set([
+    "a",
+    "an",
+    "and",
+    "are",
+    "for",
+    "how",
+    "in",
+    "is",
+    "it",
+    "me",
+    "of",
+    "or",
+    "our",
+    "the",
+    "to",
+    "translate",
+    "what",
+    "with",
+  ]);
+
+  return value
+    .toLocaleLowerCase()
+    .split(/[^a-zA-Zʼ'-]+/)
+    .map((token) => token.trim())
+    .filter((token) => token.length > 1 && !stopwords.has(token));
+}
+
+function truncateContext(value: string, maxLength: number) {
+  if (value.length <= maxLength) {
+    return value;
+  }
+
+  return `${value.slice(0, maxLength).trim()}\n\n[Truncated for rate-limit safety.]`;
+}
+
+function relevantDictionaryEntries(
+  corpus: OhloneCorpus,
+  query: string,
+  variety: Variety,
+  limit: number,
+) {
+  const tokens = assistantTokens(query);
+
+  return corpus.dictionary
+    .map((entry) => {
+      const word = entry.word.toLocaleLowerCase();
+      const english = entry.english.toLocaleLowerCase();
+      const notes = entry.notes?.toLocaleLowerCase() ?? "";
+      let score = entry.variety === variety ? 4 : 0;
+
+      for (const token of tokens) {
+        if (word === token) {
+          score += 14;
+        } else if (word.includes(token)) {
+          score += 8;
+        }
+
+        if (english.includes(token)) {
+          score += 7;
+        }
+
+        if (notes.includes(token)) {
+          score += 2;
+        }
+      }
+
+      if (entry.pos && ["Suff.", "Nrevers", "Vrevers", "Perf.", "Pro"].includes(entry.pos)) {
+        score += 2;
+      }
+
+      return { entry, score };
+    })
+    .filter(({ score }) => score > 0)
+    .sort((left, right) => right.score - left.score || left.entry.word.localeCompare(right.entry.word))
+    .slice(0, limit)
+    .map(({ entry }) => entry);
+}
+
+export async function getAssistantContext(options?: {
+  query?: string;
+  variety?: Variety;
+  mode?: "translate" | "grammar";
+}) {
   const [orthographyGuide, encodingAnalysis, corpus] = await Promise.all([
     readFile(repoPath("docs", "orthography-guide.md"), "utf8"),
     readFile(repoPath("docs", "encoding-analysis.md"), "utf8"),
@@ -251,16 +348,25 @@ export async function getAssistantContext() {
   ]);
 
   const partsOfSpeech = corpus.partsOfSpeech.join(", ");
+  const variety = options?.variety ?? "Mutsun";
+  const query = options?.query ?? "";
   const suffixEntries = corpus.dictionary.filter((entry) =>
     ["Suff.", "Nrevers", "Vrevers", "Perf.", "Pro"].includes(entry.pos ?? ""),
   );
+  const dictionary = relevantDictionaryEntries(
+    corpus,
+    query,
+    variety,
+    options?.mode === "grammar" ? 90 : 60,
+  );
+  const phonology = corpus.phonology.filter((entry) => entry.variety === variety);
 
   return {
-    orthographyGuide,
-    encodingAnalysis,
+    orthographyGuide: truncateContext(orthographyGuide, 6000),
+    encodingAnalysis: truncateContext(encodingAnalysis, 2500),
     partsOfSpeech,
-    suffixEntries,
-    dictionary: corpus.dictionary.map((entry) => ({
+    suffixEntries: suffixEntries.slice(0, 80),
+    dictionary: dictionary.map((entry) => ({
       word: entry.word,
       english: entry.english,
       ipa: entry.ipaResolved,
@@ -268,7 +374,14 @@ export async function getAssistantContext() {
       variety: entry.variety,
       source: entry.source,
     })),
-    phonology: corpus.phonology.map((entry) => ({
+    sources: corpus.sources.map((source) => ({
+      name: source.name,
+      type: source.type,
+      url: source.url,
+      description: source.description,
+      access_status: source.access_status,
+    })),
+    phonology: phonology.map((entry) => ({
       symbol: entry.symbol,
       ipa: entry.ipa,
       variety: entry.variety,

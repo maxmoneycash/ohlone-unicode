@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { Waveform } from "@/components/ui/waveform";
-import type { DictionaryEntry, PhraseEntry } from "@/lib/ohlone-data";
+import type { AudioReference } from "@/lib/ohlone-data";
 import {
   canonicalWord,
   tokenizeOhloneText,
@@ -23,9 +23,24 @@ import {
   type Variety,
 } from "@/lib/orthography";
 
+export type TtsDictionaryEntry = {
+  id: number;
+  word: string;
+  meanings: string[];
+  variety: Variety;
+  ipaResolved: string;
+  audio: AudioReference | null;
+};
+
+export type TtsPhraseEntry = {
+  id: number;
+  phrase: string;
+  variety: Variety;
+};
+
 type TtsWorkbenchProps = {
-  entries: DictionaryEntry[];
-  phrases: PhraseEntry[];
+  entries: TtsDictionaryEntry[];
+  phrases: TtsPhraseEntry[];
   varieties: Variety[];
 };
 
@@ -34,8 +49,8 @@ type PlaybackPlanItem = {
   word: string;
   english: string | null;
   ipa: string;
-  url: string;
-  source: "archive" | "synth";
+  url: string | null;
+  source: "archive" | "missing";
 };
 
 export function TtsWorkbench({
@@ -43,8 +58,8 @@ export function TtsWorkbench({
   phrases,
   varieties,
 }: TtsWorkbenchProps) {
-  const [variety, setVariety] = useState<Variety>("Mutsun");
-  const [text, setText] = useState("Saleki Asatsa");
+  const [variety, setVariety] = useState<Variety>("Chochenyo");
+  const [text, setText] = useState("saleki noono");
   const [speed, setSpeed] = useState(1);
   const [plan, setPlan] = useState<PlaybackPlanItem[]>([]);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -70,12 +85,12 @@ export function TtsWorkbench({
       word,
       english: match?.meanings[0] ?? null,
       ipa: match?.ipaResolved ?? wordToIpa(word, variety),
-      url:
-        match?.audio?.url ??
-        `/api/speech?text=${encodeURIComponent(word)}&variety=${encodeURIComponent(variety)}`,
-      source: match?.audio ? "archive" as const : "synth" as const,
+      url: match?.audio?.url ?? null,
+      source: match?.audio ? "archive" as const : "missing" as const,
     };
   }));
+
+  const playablePreviewCount = previewTokens.filter((item) => item.url).length;
 
   const waveformData = previewTokens.map((item) =>
     Math.min(0.9, Math.max(0.18, item.ipa.length / 10)),
@@ -97,23 +112,35 @@ export function TtsWorkbench({
         word: token,
         english: match?.meanings[0] ?? null,
         ipa: match?.ipaResolved ?? wordToIpa(token, variety),
-        url:
-          match?.audio?.url ??
-          `/api/speech?text=${encodeURIComponent(token)}&variety=${encodeURIComponent(variety)}`,
-        source: match?.audio ? "archive" : "synth",
+        url: match?.audio?.url ?? null,
+        source: match?.audio ? "archive" : "missing",
       };
     });
 
     setPlan(nextPlan);
-    setStatus(null);
+
+    const playableItems = nextPlan.filter((item) => item.url);
+
+    if (playableItems.length === 0) {
+      setStatus("No archived audio is available for those words yet.");
+      return;
+    }
+
+    const missingCount = nextPlan.length - playableItems.length;
+    setStatus(
+      missingCount > 0
+        ? `Playing ${playableItems.length} recorded ${playableItems.length === 1 ? "word" : "words"}; ${missingCount} ${missingCount === 1 ? "word has" : "words have"} no archived audio yet.`
+        : null,
+    );
 
     await playQueue(
-      nextPlan.map((item, index) => ({
+      playableItems.map((item) => ({
         id: item.id,
-        url: item.url,
+        url: item.url ?? undefined,
         rate: speed,
         speechText: item.word,
-        onStart: () => setActiveIndex(index),
+        onStart: () =>
+          setActiveIndex(nextPlan.findIndex((planItem) => planItem.id === item.id)),
         onEnd: () => setActiveIndex(null),
         onError: (message) => setStatus(message),
       })),
@@ -124,14 +151,13 @@ export function TtsWorkbench({
     <div className="grid gap-6">
       <section className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
         <div className="section-shell space-y-4">
-          <div className="small-label">Text to Speech</div>
+          <div className="small-label">Archived Audio</div>
           <h1 className="editorial-heading text-4xl text-[var(--color-parchment)] sm:text-5xl">
-            Use archived audio whenever it exists, then fall through to server synthesis.
+            Hear Chochenyo from recordings only.
           </h1>
           <p className="body-copy max-w-3xl">
-            The playback plan is transparent. Each token shows whether it will
-            use archived audio or generated speech, and the IPA transcription is
-            visible before playback starts.
+            Type words to build a playback plan. Words without recordings stay
+            visible, but they are not synthesized.
           </p>
         </div>
 
@@ -142,7 +168,7 @@ export function TtsWorkbench({
               /{previewTokens.map((item) => item.ipa).join(" ")} /
             </CardTitle>
             <CardDescription className="body-copy">
-              Unknown words no longer fall back to the phone browser voice.
+              Missing audio is a corpus gap, not something to cover with generated playback.
             </CardDescription>
           </CardHeader>
           <CardContent className="pb-6">
@@ -166,7 +192,11 @@ export function TtsWorkbench({
             <span className="small-label">Ohlone Text</span>
             <Textarea
               value={text}
-              onChange={(event) => setText(event.target.value)}
+              onChange={(event) => {
+                setText(event.target.value);
+                setPlan([]);
+                setStatus(null);
+              }}
               rows={4}
               className="min-h-32 border-[var(--color-border)] bg-[var(--color-panel-muted)] px-4 py-3 text-lg text-[var(--color-parchment)]"
             />
@@ -205,8 +235,8 @@ export function TtsWorkbench({
         </div>
 
         <div className="flex flex-wrap gap-3">
-          <Button onClick={() => void handlePlay()}>
-            {isPlaying ? "Playing" : "Play text"}
+          <Button disabled={playablePreviewCount === 0} onClick={() => void handlePlay()}>
+            {isPlaying ? "Playing" : playablePreviewCount > 0 ? "Play recordings" : "No audio yet"}
           </Button>
           <Button
             variant="outline"
@@ -229,11 +259,11 @@ export function TtsWorkbench({
           <CardHeader>
             <div className="small-label">Playback Plan</div>
             <CardTitle className="editorial-heading text-3xl text-[var(--color-parchment)]">
-              Word-by-word routing
+              Word-by-word audio
             </CardTitle>
             <CardDescription className="body-copy">
               Each token shows the Ohlone form, the lead English gloss when one
-              is in the corpus, the IPA, and whether it will use an archive or synthesis.
+              is in the corpus, the IPA, and whether a recording exists.
             </CardDescription>
           </CardHeader>
           <CardContent className="grid gap-3 pb-6">
@@ -272,7 +302,7 @@ export function TtsWorkbench({
                         : "border-[var(--color-border)] bg-card text-[var(--color-mist)]"
                     }
                   >
-                    {item.source === "archive" ? "Archived audio" : "Generated speech"}
+                    {item.source === "archive" ? "Archived audio" : "No audio yet"}
                   </Badge>
                 </div>
               </div>
@@ -296,7 +326,11 @@ export function TtsWorkbench({
                 key={phrase.id}
                 variant="outline"
                 className="h-auto border-[var(--color-border)] bg-card px-4 py-2 text-left text-[var(--color-mist)] hover:text-[var(--color-parchment)]"
-                onClick={() => setText(phrase.phrase)}
+                onClick={() => {
+                  setText(phrase.phrase);
+                  setPlan([]);
+                  setStatus(null);
+                }}
               >
                 {phrase.phrase}
               </Button>
