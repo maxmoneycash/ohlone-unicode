@@ -41,7 +41,7 @@ export async function GET(request: NextRequest) {
     return buildAudioResponse(request, {
       bytes,
       contentType: "audio/wav",
-      cacheControl: "public, max-age=31536000, immutable",
+      cacheControl: "no-store",
     });
   } catch {
     return new Response("Audio file not found.", { status: 404 });
