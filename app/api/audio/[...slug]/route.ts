@@ -3,8 +3,13 @@ import path from "node:path";
 
 import type { NextRequest } from "next/server";
 import { buildAudioResponse } from "@/lib/audio-response";
+import audioIndex from "@/audio/audio_index.json";
 
 export const runtime = "nodejs";
+
+const trustedAudioFiles = new Set(
+  audioIndex.map((entry: { audio_file: string }) => entry.audio_file),
+);
 
 export async function GET(request: NextRequest) {
   const relativePath = request.nextUrl.pathname.replace(/^\/api\/audio\//, "");
@@ -23,6 +28,12 @@ export async function GET(request: NextRequest) {
 
   if (!absolutePath.startsWith(audioRoot)) {
     return new Response("Invalid audio path.", { status: 400 });
+  }
+
+  if (!trustedAudioFiles.has(decodedPath)) {
+    return new Response("Audio file is not in the trusted audio index.", {
+      status: 404,
+    });
   }
 
   try {

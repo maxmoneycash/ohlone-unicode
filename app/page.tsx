@@ -8,9 +8,12 @@ export default async function HomePage() {
   const samples = [
     corpus.dictionary.find((entry) => entry.variety === "Chochenyo" && entry.word === "makkin"),
     corpus.dictionary.find((entry) => entry.variety === "Chochenyo" && entry.word === "noono"),
-    corpus.dictionary.find((entry) => entry.variety === "Chochenyo" && entry.word === "saleki"),
+    corpus.dictionary.find((entry) => entry.variety === "Chochenyo" && entry.word === "mak"),
   ].filter(Boolean);
   const chochenyoEntryCount = corpus.statistics.entries_by_variety.Chochenyo ?? 0;
+  const chochenyoAudioCount = corpus.dictionary.filter(
+    (entry) => entry.variety === "Chochenyo" && entry.audio,
+  ).length;
 
   return (
     <div className="grid gap-8">
@@ -72,7 +75,7 @@ export default async function HomePage() {
             </h2>
           </div>
           <p className="text-sm text-[var(--color-copy-dim)]">
-            {chochenyoEntryCount} Chochenyo entries · 15 archived audio files
+            {chochenyoEntryCount} Chochenyo entries · {chochenyoAudioCount} trusted audio files
           </p>
         </div>
 

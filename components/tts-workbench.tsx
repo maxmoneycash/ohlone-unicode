@@ -59,7 +59,7 @@ export function TtsWorkbench({
   varieties,
 }: TtsWorkbenchProps) {
   const [variety, setVariety] = useState<Variety>("Chochenyo");
-  const [text, setText] = useState("saleki noono");
+  const [text, setText] = useState("mak noono");
   const [speed, setSpeed] = useState(1);
   const [plan, setPlan] = useState<PlaybackPlanItem[]>([]);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);

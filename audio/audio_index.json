@@ -1,24 +1,10 @@
 [
   {
-    "word": "Tújŝtak",
-    "english": "Mount Diablo ('little hill')",
-    "ipa": "ʈújŝtak",
-    "variety": "Chochenyo",
-    "audio_file": "chochenyo/Tújŝtak.wav"
-  },
-  {
     "word": "hoise",
     "english": "beautiful",
     "ipa": "hoiʃe",
     "variety": "Chochenyo",
     "audio_file": "chochenyo/hoise.wav"
-  },
-  {
-    "word": "hussistak",
-    "english": "future",
-    "ipa": "huʃʃiʃtak",
-    "variety": "Chochenyo",
-    "audio_file": "chochenyo/hussistak.wav"
   },
   {
     "word": "mak",
@@ -56,27 +42,6 @@
     "audio_file": "chochenyo/noono.wav"
   },
   {
-    "word": "saleki",
-    "english": "good",
-    "ipa": "ʃaleki",
-    "variety": "Chochenyo",
-    "audio_file": "chochenyo/saleki.wav"
-  },
-  {
-    "word": "siiniinikma",
-    "english": "children",
-    "ipa": "ʃiːniːnikma",
-    "variety": "Chochenyo",
-    "audio_file": "chochenyo/siiniinikma.wav"
-  },
-  {
-    "word": "suyykma",
-    "english": "family",
-    "ipa": "ʃujjkma",
-    "variety": "Chochenyo",
-    "audio_file": "chochenyo/suyykma.wav"
-  },
-  {
     "word": "tiirinikma",
     "english": "awakens",
     "ipa": "tiːɾinikma",
@@ -98,88 +63,11 @@
     "audio_file": "chochenyo/wolwoolum.wav"
   },
   {
-    "word": "xučyun",
-    "english": "Berkeley shoreline area (Huchiun)",
-    "ipa": "hučjun",
-    "variety": "Chochenyo",
-    "audio_file": "chochenyo/xučyun.wav"
-  },
-  {
     "word": "Luohu",
     "english": "yearling calf",
     "ipa": "lʲuohu",
     "variety": "Mutsun",
     "audio_file": "mutsun/Luohu.wav"
-  },
-  {
-    "word": "Notko",
-    "english": "be short",
-    "ipa": "ɲotko",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/Notko.wav"
-  },
-  {
-    "word": "SaSran",
-    "english": "raccoon",
-    "ipa": "ʂaʂɾan",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/SaSran.wav"
-  },
-  {
-    "word": "Saanay",
-    "english": "near, nearby",
-    "ipa": "ʂaːnaj",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/Saanay.wav"
-  },
-  {
-    "word": "Sokwe",
-    "english": "wow",
-    "ipa": "ʂokwe",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/Sokwe.wav"
-  },
-  {
-    "word": "Taakampi",
-    "english": "bring, carry something",
-    "ipa": "ʈaːkampi",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/Taakampi.wav"
-  },
-  {
-    "word": "Taywe",
-    "english": "make acorn soup",
-    "ipa": "ʈajwe",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/Taywe.wav"
-  },
-  {
-    "word": "TiiTin",
-    "english": "get well/better, recover",
-    "ipa": "ʈiːʈin",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/TiiTin.wav"
-  },
-  {
-    "word": "aacic",
-    "english": "pipe",
-    "ipa": "aːtʃitʃ",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/aacic.wav"
-  },
-  {
-    "word": "aamane",
-    "english": "truly, really, indeed",
-    "ipa": "aːmane",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/aamane.wav"
-  },
-  {
-    "word": "accuSte",
-    "english": "finished, done",
-    "ipa": "atʃtʃuʂte",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/accuSte.wav"
   },
   {
     "word": "ahhes",
@@ -210,41 +98,6 @@
     "audio_file": "mutsun/amSi.wav"
   },
   {
-    "word": "ara",
-    "english": "then, and, next",
-    "ipa": "aɾa",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/ara.wav"
-  },
-  {
-    "word": "arikkay",
-    "english": "valley oak tree/acorn",
-    "ipa": "aɾikkaj",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/arikkay.wav"
-  },
-  {
-    "word": "arkeh",
-    "english": "oak",
-    "ipa": "aɾkeh",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/arkeh.wav"
-  },
-  {
-    "word": "aruh'a",
-    "english": "morning",
-    "ipa": "aɾuhʔa",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/aruh_glottal_a.wav"
-  },
-  {
-    "word": "aruuta",
-    "english": "tomorrow",
-    "ipa": "aɾuːta",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/aruuta.wav"
-  },
-  {
     "word": "asa'a",
     "english": "truly",
     "ipa": "asaʔa",
@@ -252,95 +105,11 @@
     "audio_file": "mutsun/asa_glottal_a.wav"
   },
   {
-    "word": "atSa",
-    "english": "be a girl",
-    "ipa": "atʂa",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/atSa.wav"
-  },
-  {
-    "word": "atSakiSpu",
-    "english": "pretend to be a girl",
-    "ipa": "atʂakiʂpu",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/atSakiSpu.wav"
-  },
-  {
-    "word": "caahi",
-    "english": "barn owl",
-    "ipa": "tʃaːhi",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/caahi.wav"
-  },
-  {
-    "word": "ceeyes",
-    "english": "jackrabbit",
-    "ipa": "tʃeːjes",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/ceeyes.wav"
-  },
-  {
-    "word": "ceyse",
-    "english": "hunt jackrabbits",
-    "ipa": "tʃejse",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/ceyse.wav"
-  },
-  {
-    "word": "cipituk",
-    "english": "mallard duck",
-    "ipa": "tʃipituk",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/cipituk.wav"
-  },
-  {
-    "word": "cit",
-    "english": "shout during gambling game",
-    "ipa": "tʃit",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/cit.wav"
-  },
-  {
-    "word": "corko",
-    "english": "dry up",
-    "ipa": "tʃoɾko",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/corko.wav"
-  },
-  {
-    "word": "corkoSte",
-    "english": "dry",
-    "ipa": "tʃoɾkoʂte",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/corkoSte.wav"
-  },
-  {
-    "word": "cunyu",
-    "english": "sing",
-    "ipa": "tʃunju",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/cunyu.wav"
-  },
-  {
     "word": "diyos",
     "english": "God",
     "ipa": "dijos",
     "variety": "Mutsun",
     "audio_file": "mutsun/diyos.wav"
-  },
-  {
-    "word": "ec",
-    "english": "shout from gambling game",
-    "ipa": "etʃ",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/ec.wav"
-  },
-  {
-    "word": "eccer",
-    "english": "iron",
-    "ipa": "etʃtʃeɾ",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/eccer.wav"
   },
   {
     "word": "ekwe",
@@ -376,20 +145,6 @@
     "ipa": "ennes",
     "variety": "Mutsun",
     "audio_file": "mutsun/ennes.wav"
-  },
-  {
-    "word": "haahe",
-    "english": "run away",
-    "ipa": "haːhe",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/haahe.wav"
-  },
-  {
-    "word": "haayi",
-    "english": "come here!",
-    "ipa": "haːji",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/haayi.wav"
   },
   {
     "word": "hassen",
@@ -441,20 +196,6 @@
     "audio_file": "mutsun/hemec_glottal_a.wav"
   },
   {
-    "word": "hiSSen",
-    "english": "work",
-    "ipa": "hiʂʂen",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/hiSSen.wav"
-  },
-  {
-    "word": "hiimi",
-    "english": "always",
-    "ipa": "hiːmi",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/hiimi.wav"
-  },
-  {
     "word": "himah'a",
     "english": "all, every",
     "ipa": "himahʔa",
@@ -483,20 +224,6 @@
     "audio_file": "mutsun/hohe.wav"
   },
   {
-    "word": "huTel",
-    "english": "earring",
-    "ipa": "huʈel",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/huTel.wav"
-  },
-  {
-    "word": "huTle",
-    "english": "put on earrings",
-    "ipa": "huʈle",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/huTle.wav"
-  },
-  {
     "word": "hulyaana",
     "english": "Juliana",
     "ipa": "huljaːna",
@@ -504,32 +231,11 @@
     "audio_file": "mutsun/hulyaana.wav"
   },
   {
-    "word": "huusu",
-    "english": "eel",
-    "ipa": "huːsu",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/huusu.wav"
-  },
-  {
     "word": "huyhuy",
     "english": "cutgrass, bunchgrass",
     "ipa": "hujhuj",
     "variety": "Mutsun",
     "audio_file": "mutsun/huyhuy.wav"
-  },
-  {
-    "word": "icci",
-    "english": "bite",
-    "ipa": "itʃtʃi",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/icci.wav"
-  },
-  {
-    "word": "ice",
-    "english": "It's nothing!",
-    "ipa": "itʃe",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/ice.wav"
   },
   {
     "word": "inahpu",
@@ -553,53 +259,11 @@
     "audio_file": "mutsun/inhan.wav"
   },
   {
-    "word": "inna",
-    "english": "fall",
-    "ipa": "inna",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/inna.wav"
-  },
-  {
-    "word": "innaSte",
-    "english": "fallen",
-    "ipa": "innaʂte",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/innaSte.wav"
-  },
-  {
     "word": "issu",
     "english": "hand",
     "ipa": "issu",
     "variety": "Mutsun",
     "audio_file": "mutsun/issu.wav"
-  },
-  {
-    "word": "kaa",
-    "english": "daughter",
-    "ipa": "kaː",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/kaa.wav"
-  },
-  {
-    "word": "kaamer",
-    "english": "dwarf sunflower",
-    "ipa": "kaːmeɾ",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/kaamer.wav"
-  },
-  {
-    "word": "kaatYul",
-    "english": "calf of the leg",
-    "ipa": "kaːtʲul",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/kaatYul.wav"
-  },
-  {
-    "word": "kaayi",
-    "english": "ache, hurt, be spicy",
-    "ipa": "kaːji",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/kaayi.wav"
   },
   {
     "word": "kamre",
@@ -630,67 +294,11 @@
     "audio_file": "mutsun/katYlu.wav"
   },
   {
-    "word": "kawra",
-    "english": "end",
-    "ipa": "kawɾa",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/kawra.wav"
-  },
-  {
-    "word": "kawraSte",
-    "english": "ended",
-    "ipa": "kawɾaʂte",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/kawraSte.wav"
-  },
-  {
     "word": "ke",
     "english": "what?; yes?; Look! Listen!",
     "ipa": "ke",
     "variety": "Mutsun",
     "audio_file": "mutsun/ke.wav"
-  },
-  {
-    "word": "kicca",
-    "english": "lock",
-    "ipa": "kitʃtʃa",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/kicca.wav"
-  },
-  {
-    "word": "kicwa",
-    "english": "unlock",
-    "ipa": "kitʃwa",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/kicwa.wav"
-  },
-  {
-    "word": "komme",
-    "english": "get tired",
-    "ipa": "komme",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/komme.wav"
-  },
-  {
-    "word": "kommeSte",
-    "english": "tired",
-    "ipa": "kommeʂte",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/kommeSte.wav"
-  },
-  {
-    "word": "laake",
-    "english": "rise",
-    "ipa": "laːke",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/laake.wav"
-  },
-  {
-    "word": "laalak",
-    "english": "goose",
-    "ipa": "laːlak",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/laalak.wav"
   },
   {
     "word": "lalla",
@@ -705,20 +313,6 @@
     "ipa": "lallawi",
     "variety": "Mutsun",
     "audio_file": "mutsun/lallawi.wav"
-  },
-  {
-    "word": "maahi",
-    "english": "close, cover",
-    "ipa": "maːhi",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/maahi.wav"
-  },
-  {
-    "word": "maayi",
-    "english": "laugh",
-    "ipa": "maːji",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/maayi.wav"
   },
   {
     "word": "moT",
@@ -805,20 +399,6 @@
     "audio_file": "mutsun/opanniS.wav"
   },
   {
-    "word": "paTTi",
-    "english": "hold, catch, grasp",
-    "ipa": "paʈʈi",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/paTTi.wav"
-  },
-  {
-    "word": "paaka",
-    "english": "shell",
-    "ipa": "paːka",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/paaka.wav"
-  },
-  {
     "word": "pelohte",
     "english": "bald",
     "ipa": "pelohte",
@@ -840,60 +420,11 @@
     "audio_file": "mutsun/pire.wav"
   },
   {
-    "word": "por",
-    "english": "flea",
-    "ipa": "poɾ",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/por.wav"
-  },
-  {
-    "word": "porpor",
-    "english": "Fremont cottonwood",
-    "ipa": "poɾpoɾ",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/porpor.wav"
-  },
-  {
     "word": "pulmu",
     "english": "make bread",
     "ipa": "pulmu",
     "variety": "Mutsun",
     "audio_file": "mutsun/pulmu.wav"
-  },
-  {
-    "word": "raakat",
-    "english": "name",
-    "ipa": "ɾaːkat",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/raakat.wav"
-  },
-  {
-    "word": "rammay",
-    "english": "inside",
-    "ipa": "ɾammaj",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/rammay.wav"
-  },
-  {
-    "word": "ricca",
-    "english": "talk, speak",
-    "ipa": "ɾitʃtʃa",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/ricca.wav"
-  },
-  {
-    "word": "rini",
-    "english": "above",
-    "ipa": "ɾini",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/rini.wav"
-  },
-  {
-    "word": "rorSo",
-    "english": "play",
-    "ipa": "ɾoɾʂo",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/rorSo.wav"
   },
   {
     "word": "saake",
@@ -931,20 +462,6 @@
     "audio_file": "mutsun/tYuuken.wav"
   },
   {
-    "word": "taa",
-    "english": "older sister",
-    "ipa": "taː",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/taa.wav"
-  },
-  {
-    "word": "taacin",
-    "english": "kangaroo rat, river rat",
-    "ipa": "taːtʃin",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/taacin.wav"
-  },
-  {
     "word": "tacci",
     "english": "catch river/kangaroo rats",
     "ipa": "tatʃtʃi",
@@ -957,13 +474,6 @@
     "ipa": "tapɾej",
     "variety": "Mutsun",
     "audio_file": "mutsun/taprey.wav"
-  },
-  {
-    "word": "tare",
-    "english": "kiddo, buddy",
-    "ipa": "taɾe",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/tare.wav"
   },
   {
     "word": "tawah",
@@ -1001,34 +511,6 @@
     "audio_file": "mutsun/uuni.wav"
   },
   {
-    "word": "waaha",
-    "english": "scratch, sing slowly",
-    "ipa": "waːha",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/waaha.wav"
-  },
-  {
-    "word": "waate",
-    "english": "come",
-    "ipa": "waːte",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/waate.wav"
-  },
-  {
-    "word": "wacosta",
-    "english": "Carmel River",
-    "ipa": "watʃosta",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/wacosta.wav"
-  },
-  {
-    "word": "wacruntak",
-    "english": "Castroville",
-    "ipa": "watʃɾuntak",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/wacruntak.wav"
-  },
-  {
     "word": "wak",
     "english": "he/she/it",
     "ipa": "wak",
@@ -1064,27 +546,6 @@
     "audio_file": "mutsun/yuksi.wav"
   },
   {
-    "word": "yuu",
-    "english": "and",
-    "ipa": "juː",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/yuu.wav"
-  },
-  {
-    "word": "yuukis",
-    "english": "acorn",
-    "ipa": "juːkis",
-    "variety": "Mutsun",
-    "audio_file": "mutsun/yuukis.wav"
-  },
-  {
-    "word": "Atsia",
-    "english": "mother",
-    "ipa": "Atsia",
-    "variety": "OCEN Rumsen",
-    "audio_file": "ocen_rumsen/Atsia.wav"
-  },
-  {
     "word": "Ewshai",
     "english": "ancestors",
     "ipa": "Ewʃhai",
@@ -1099,34 +560,6 @@
     "audio_file": "ocen_rumsen/Iapa.wav"
   },
   {
-    "word": "Mechix",
-    "english": "aunt",
-    "ipa": "Metʃhih",
-    "variety": "OCEN Rumsen",
-    "audio_file": "ocen_rumsen/Mechix.wav"
-  },
-  {
-    "word": "Metx",
-    "english": "grandfather",
-    "ipa": "Meth",
-    "variety": "OCEN Rumsen",
-    "audio_file": "ocen_rumsen/Metx.wav"
-  },
-  {
-    "word": "Saleki Asatsa",
-    "english": "Good Morning",
-    "ipa": "ʃaleki Aʃatsa",
-    "variety": "OCEN Rumsen",
-    "audio_file": "ocen_rumsen/Saleki_Asatsa.wav"
-  },
-  {
-    "word": "Saleki Atsa",
-    "english": "Good Day",
-    "ipa": "ʃaleki Atsa",
-    "variety": "OCEN Rumsen",
-    "audio_file": "ocen_rumsen/Saleki_Atsa.wav"
-  },
-  {
     "word": "Saleki Itsa",
     "english": "Good Afternoon",
     "ipa": "ʃaleki Itsa",
@@ -1139,20 +572,6 @@
     "ipa": "ʃaleki Itsu",
     "variety": "OCEN Rumsen",
     "audio_file": "ocen_rumsen/Saleki_Itsu.wav"
-  },
-  {
-    "word": "Saleki Tomanis",
-    "english": "Good Night",
-    "ipa": "ʃaleki ʈomaniʃ",
-    "variety": "OCEN Rumsen",
-    "audio_file": "ocen_rumsen/Saleki_Tomanis.wav"
-  },
-  {
-    "word": "a'lam",
-    "english": "he/she/it",
-    "ipa": "aʔlam",
-    "variety": "OCEN Rumsen",
-    "audio_file": "ocen_rumsen/a_glottal_lam.wav"
   },
   {
     "word": "aha'ya",
@@ -1204,13 +623,6 @@
     "audio_file": "ocen_rumsen/aniwa.wav"
   },
   {
-    "word": "cha'a",
-    "english": "exist/live",
-    "ipa": "tʃhaʔa",
-    "variety": "OCEN Rumsen",
-    "audio_file": "ocen_rumsen/cha_glottal_a.wav"
-  },
-  {
     "word": "eni",
     "english": "I",
     "ipa": "eni",
@@ -1244,13 +656,6 @@
     "ipa": "huniki",
     "variety": "OCEN Rumsen",
     "audio_file": "ocen_rumsen/huniki.wav"
-  },
-  {
-    "word": "ichi",
-    "english": "sister",
-    "ipa": "itʃhi",
-    "variety": "OCEN Rumsen",
-    "audio_file": "ocen_rumsen/ichi.wav"
   },
   {
     "word": "ike",
@@ -1309,20 +714,6 @@
     "audio_file": "ocen_rumsen/lax.wav"
   },
   {
-    "word": "lechi",
-    "english": "us",
-    "ipa": "letʃhi",
-    "variety": "OCEN Rumsen",
-    "audio_file": "ocen_rumsen/lechi.wav"
-  },
-  {
-    "word": "let",
-    "english": "we",
-    "ipa": "let",
-    "variety": "OCEN Rumsen",
-    "audio_file": "ocen_rumsen/let.wav"
-  },
-  {
     "word": "lex",
     "english": "our",
     "ipa": "leh",
@@ -1377,13 +768,6 @@
     "ipa": "panna",
     "variety": "OCEN Rumsen",
     "audio_file": "ocen_rumsen/panna.wav"
-  },
-  {
-    "word": "sholeta",
-    "english": "daughter/girl",
-    "ipa": "ʃholeta",
-    "variety": "OCEN Rumsen",
-    "audio_file": "ocen_rumsen/sholeta.wav"
   },
   {
     "word": "tanoch",
